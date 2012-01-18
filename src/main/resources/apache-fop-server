@@ -1,0 +1,19 @@
+#!/bin/bash
+COMMAND=$1
+function start {
+  java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
+}
+
+case $COMMAND in
+
+"start"*)
+  start
+  ;;
+"stop"*)
+  echo "stop"
+  ;;
+*)
+  echo "apache-fop-server start|stop"
+  ;;
+  
+esac

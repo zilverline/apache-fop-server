@@ -11,6 +11,7 @@
   <properties>
     <scala.version>2.9.1</scala.version>
     <jetty.version>7.4.5.v20110725</jetty.version>
+    <http.client.version>4.1.1</http.client.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <repositories>
@@ -85,16 +86,30 @@
         <version>${jetty.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.scalatest</groupId>
-        <artifactId>scalatest_${scala.version}</artifactId>
-        <version>1.6.1</version>
-        <scope>test</scope>
+        <groupId>org.apache.xmlgraphics</groupId>
+        <artifactId>fop</artifactId>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
-        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>uk.co.opsb</groupId>
+        <artifactId>butler-io</artifactId>
+        <version>0.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest_${scala.version}</artifactId>
+        <version>1.6.1</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
@@ -105,7 +120,13 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.1.1</version>
+        <version>${http.client.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpmime</artifactId>
+        <version>${http.client.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
@@ -146,6 +167,23 @@
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime
+      </artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>fop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>uk.co.opsb</groupId>
+      <artifactId>butler-io</artifactId>
     </dependency>
   </dependencies>
 

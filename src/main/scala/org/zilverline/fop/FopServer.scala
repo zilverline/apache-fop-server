@@ -9,8 +9,9 @@ class FopServer {
 
   def start() {
     val contextHandlers = new ContextHandlerCollection()
-    val aliveContext = wrapContext(new AliveHandler(), "/")
-    contextHandlers.setHandlers(Array[Handler](aliveContext))
+    val aliveContext = wrapContext(new AliveHandler(), "/is-alive")
+    val pdfContext = wrapContext(new PdfHandler(), "/pdf")
+    contextHandlers.setHandlers(Array[Handler](aliveContext, pdfContext))
     server setHandler contextHandlers
     stopOnJvmShutdown()
     server.start()
@@ -40,4 +41,8 @@ class FopServer {
 
 object FopServer {
   val DefaultPort = 9999
+  def main(args: Array[String]): Unit = {
+    val server = new FopServer()
+    server.start();
+  }
 }

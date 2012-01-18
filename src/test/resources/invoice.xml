@@ -1,0 +1,57 @@
+<invoice-record>
+  <id type="integer">1</id>
+  <aggregate-id>935b9d10-23fd-012f-8088-0026bb6a6a36</aggregate-id>
+  <organization-id>935bcc60-23fd-012f-808a-0026bb6a6a36</organization-id>
+  <sequence-number type="integer">1</sequence-number>
+  <invoice-number nil="true"></invoice-number>
+  <invoice-payment-instructions nil="true"></invoice-payment-instructions>
+  <invoice-date type="date" nil="true"></invoice-date>
+  <invoice-due-date type="date" nil="true"></invoice-due-date>
+  <invoice-currency nil="true"></invoice-currency>
+  <invoice-total type="decimal" nil="true"></invoice-total>
+  <invoice-total-vat type="decimal" nil="true"></invoice-total-vat>
+  <invoice-total-incl-vat type="decimal" nil="true"></invoice-total-incl-vat>
+  <invoice-status nil="true"></invoice-status>
+  <missing-information nil="true"></missing-information>
+  <invoice-date-sent type="date" nil="true"></invoice-date-sent>
+  <recipient-company-name nil="true"></recipient-company-name>
+  <recipient-attn nil="true"></recipient-attn>
+  <recipient-address-street nil="true"></recipient-address-street>
+  <recipient-address-city nil="true"></recipient-address-city>
+  <recipient-address-postal-code nil="true"></recipient-address-postal-code>
+  <recipient-address-country-code nil="true"></recipient-address-country-code>
+  <recipient-address-country-name nil="true"></recipient-address-country-name>
+  <recipient-email nil="true"></recipient-email>
+  <creditor-company-name nil="true"></creditor-company-name>
+  <creditor-address-street nil="true"></creditor-address-street>
+  <creditor-address-city nil="true"></creditor-address-city>
+  <creditor-address-postal-code nil="true"></creditor-address-postal-code>
+  <creditor-address-country-code nil="true"></creditor-address-country-code>
+  <creditor-address-country-name nil="true"></creditor-address-country-name>
+  <creditor-coc-number nil="true"></creditor-coc-number>
+  <creditor-vat-number nil="true"></creditor-vat-number>
+  <creditor-bank-account-number nil="true"></creditor-bank-account-number>
+  <creditor-iban nil="true"></creditor-iban>
+  <creditor-bic nil="true"></creditor-bic>
+  <mail-data-from nil="true"></mail-data-from>
+  <mail-data-to nil="true"></mail-data-to>
+  <mail-data-subject nil="true"></mail-data-subject>
+  <mail-data-body nil="true"></mail-data-body>
+  <clicked-download type="boolean">false</clicked-download>
+  <invoice-pdf type="binary" nil="true" encoding="base64"></invoice-pdf>
+  <created-at type="datetime">2012-01-18T13:26:31+01:00</created-at>
+  <updated-at type="datetime">2012-01-18T13:26:31+01:00</updated-at>
+  <line-item-records type="array">
+    <line-item-record>
+      <id type="integer">1</id>
+      <description>ScrumMaster training voor Jan</description>
+      <vat type="decimal">0.19</vat>
+      <amount type="decimal">1000.0</amount>
+      <total-amount-ex-vat type="decimal">1000.0</total-amount-ex-vat>
+      <currency>EUR</currency>
+      <quantity type="decimal">1.0</quantity>
+      <line-item-id type="integer">3</line-item-id>
+      <invoice-record-id type="integer">1</invoice-record-id>
+    </line-item-record>
+  </line-item-records>
+</invoice-record>
