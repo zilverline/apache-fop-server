@@ -1,16 +1,20 @@
 #!/bin/bash
 COMMAND=$1
+PID_FILE=pids/apache-fo-server.pid
 function start {
-  java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
+  java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer &
 }
 
 case $COMMAND in
 
 "start"*)
   start
+  PID=$!
+  echo $PID > $PID_FILE
   ;;
 "stop"*)
-  echo "stop"
+  kill -TERM `cat $PID_FILE`
+  rm $PID_FILE
   ;;
 *)
   echo "apache-fop-server start|stop"

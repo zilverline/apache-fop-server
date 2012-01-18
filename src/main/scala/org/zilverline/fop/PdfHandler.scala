@@ -6,7 +6,6 @@ import javax.servlet.http.{HttpServletResponse, HttpServletRequest}
 import javax.servlet.http.HttpServletResponse._
 import org.apache.fop.apps.{FopFactory, Fop}
 import javax.xml.transform.stream.StreamSource
-import org.apache.commons.io.IOUtils
 import java.lang.String
 import uk.co.opsb.butler.ButlerIO
 import javax.xml.transform.{TransformerFactory, URIResolver, Transformer}
@@ -14,6 +13,7 @@ import org.apache.xmlgraphics.util.MimeConstants
 import javax.xml.transform.sax.SAXResult
 import java.io.{StringReader, File, OutputStream}
 import org.apache.log4j.Logger
+import org.apache.commons.io.{FileUtils, IOUtils}
 
 
 class PdfHandler(val configFileName: String = "fop/fop-config.xml") extends AbstractHandler {
@@ -31,7 +31,8 @@ class PdfHandler(val configFileName: String = "fop/fop-config.xml") extends Abst
       Log.info("Generating pdf.")
       response.setStatus(SC_OK)
       response.setContentType("application/pdf")
-      response.getOutputStream.write(createOutput(xsl, xml))
+      val pdf: Array[Byte] = createOutput(xsl, xml)
+      response.getOutputStream.write(pdf)
       response.getOutputStream.flush()
       Log.info("Pdf generated!")
     } catch {
@@ -50,11 +51,11 @@ class PdfHandler(val configFileName: String = "fop/fop-config.xml") extends Abst
       val fop = createFop(out, MimeConstants.MIME_PDF);
       val transformer = createTransformer(xsl);
       transform(xml, fop, transformer);
-      return bos.toByteArray();
     } finally {
       IOUtils.closeQuietly(out);
       IOUtils.closeQuietly(bos);
     }
+    return bos.toByteArray();
   }
 
   private def createFop(out: OutputStream, mimeType: String): Fop = {

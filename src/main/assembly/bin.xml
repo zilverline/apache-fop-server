@@ -37,10 +37,17 @@
     </fileSet>
     <fileSet>
       <directory>${basedir}/logs</directory>
+      <outputDirectory>logs</outputDirectory>
       <excludes>
         <exclude>*</exclude>
       </excludes>
-      <outputDirectory>logs</outputDirectory>
+    </fileSet>
+    <fileSet>
+      <directory>${basedir}/pids</directory>
+      <outputDirectory>pid</outputDirectory>
+      <excludes>
+        <exclude>*</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 </assembly>
