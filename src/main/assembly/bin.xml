@@ -44,7 +44,7 @@
     </fileSet>
     <fileSet>
       <directory>${basedir}/pids</directory>
-      <outputDirectory>pid</outputDirectory>
+      <outputDirectory>pids</outputDirectory>
       <excludes>
         <exclude>*</exclude>
       </excludes>
