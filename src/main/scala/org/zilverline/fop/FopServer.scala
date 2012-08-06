@@ -33,7 +33,7 @@ class FopServer {
   private def wrapContext(handler: Handler, contextPath: String) = {
 
     val contextHandler = new ContextHandler(contextPath)
-    contextHandler.setMaxFormContentSize(2000000)
+    contextHandler.setMaxFormContentSize(4000000)
     contextHandler.setHandler(handler)
     contextHandler.setAllowNullPathInfo(true)
     contextHandler
