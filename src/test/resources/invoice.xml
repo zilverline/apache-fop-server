@@ -8,9 +8,9 @@
   <invoice-date type="date" nil="true"></invoice-date>
   <invoice-due-date type="date" nil="true"></invoice-due-date>
   <invoice-currency nil="true"></invoice-currency>
-  <invoice-total type="decimal" nil="true"></invoice-total>
-  <invoice-total-vat type="decimal" nil="true"></invoice-total-vat>
-  <invoice-total-incl-vat type="decimal" nil="true"></invoice-total-incl-vat>
+  <invoice-total type="decimal" nil="true">1000.0</invoice-total>
+  <invoice-total-vat type="decimal" nil="true">190.0</invoice-total-vat>
+  <invoice-total-incl-vat type="decimal" nil="true">1190.0</invoice-total-incl-vat>
   <invoice-status nil="true"></invoice-status>
   <missing-information nil="true"></missing-information>
   <invoice-date-sent type="date" nil="true"></invoice-date-sent>

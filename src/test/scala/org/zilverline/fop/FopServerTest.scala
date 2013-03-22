@@ -1,49 +1,51 @@
 package org.zilverline.fop
 
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.matchers.ShouldMatchers
-import org.apache.http.impl.client.DefaultHttpClient
-import org.scalatest.{BeforeAndAfter, FunSuite}
-import org.apache.http.client.methods.{HttpPost, HttpGet}
+import dispatch._
 import java.io.File
 import org.apache.commons.io.FileUtils
 import org.apache.xmlgraphics.util.MimeConstants
-import org.apache.http.util.EntityUtils
-import org.apache.http.NameValuePair
-import org.apache.http.message.BasicNameValuePair
-import org.apache.http.client.entity.UrlEncodedFormEntity
+import org.scalatest.{ BeforeAndAfterAll, FunSuite }
+import org.scalatest.matchers.ShouldMatchers
 import scala.collection.JavaConverters._
 
+/*
+ * Test the FopServer using the http://dispatch.databinder.net/ HTTP
+ * client library.
+ */
+@org.junit.runner.RunWith(classOf[org.scalatest.junit.JUnitRunner])
+class FopServerTest extends FunSuite with ShouldMatchers with BeforeAndAfterAll {
+  val server = unfiltered.jetty.Http.anylocal.plan(FopServer.plan)
 
-@RunWith(classOf[JUnitRunner])
-class FopServerTest extends FunSuite with ShouldMatchers with BeforeAndAfter {
-  val server: FopServer = new FopServer()
-  val client = new DefaultHttpClient();
+  def BaseUrl = host("localhost", server.port)
+  def IsAliveUrl = BaseUrl / "is-alive"
+  def PdfUrl = BaseUrl / "pdf"
 
-  after {
-    server.stopServer()
-  }
+  lazy val xsl = FileUtils.readFileToString(new File("src/test/resources/invoice.xsl"))
+  lazy val xml = FileUtils.readFileToString(new File("src/test/resources/invoice.xml"))
+
+  override def beforeAll = server.start
+  override def afterAll = server.stop
 
   test("should start a server") {
-    server.start();
-    val get = new HttpGet("http://localhost:%d/is-alive" format FopServer.DefaultPort);
-    val response = client.execute(get);
-    EntityUtils.toString(response.getEntity()) should be("Ok")
+    val response = Http(IsAliveUrl OK as.String).apply()
+    response should be("Ok")
   }
 
   test("should create a pdf") {
-    server.start()
-    val post = new HttpPost("http://localhost:%d/pdf" format FopServer.DefaultPort);
-    val xsl = FileUtils.readFileToString(new File("src/test/resources/invoice.xsl"))
-    val xml = FileUtils.readFileToString(new File("src/test/resources/invoice.xml"))
+    val request = PdfUrl << Map("xsl" -> xsl, "xml" -> xml)
 
-    val params: List[NameValuePair] = List[NameValuePair](new BasicNameValuePair("xsl", xsl), new BasicNameValuePair("xml", xml))
-    post.setEntity(new UrlEncodedFormEntity(params.asJava, "UTF-8"))
-    val response = client.execute(post);
-    response.getStatusLine.getStatusCode should be(200)
-    val result = response.getEntity
-    EntityUtils.getContentMimeType(result) should be(MimeConstants.MIME_PDF)
-    EntityUtils.toByteArray(result).length should be > (0)
+    val pdf = Http(request OK as.Bytes).apply()
+
+    pdf.length should be > (0)
+    FileUtils.writeByteArrayToFile(new File("target/generated-test.pdf"), pdf)
+  }
+
+  test("should respond with internal server error on exception") {
+    val request = PdfUrl << Map("xsl" -> "bad", "xml" -> "worse")
+
+    val response = Http(request).apply()
+
+    response.getStatusCode() should be(500)
+    response.getResponseBody() should be("See apache-fop-server/logs for more detailed error message.")
   }
 }

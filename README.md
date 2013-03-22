@@ -1,6 +1,10 @@
 # Apache FOP Server
 
-Simple embedded jetty server that provides creating pdf's using [apache fop](http://xmlgraphics.apache.org/fop/).
+Simple embedded HTTP server that provides creating PDF's using [apache fop](http://xmlgraphics.apache.org/fop/).
+
+The server uses the Unfiltered (http://unfiltered.databinder.net/) Scala HTTP server toolkit and Jetty.
+
+Testing is done using the Dispatch (http://dispatch.databinder.net/) HTTP client library.
 
 ### How to use
 Download one of the tar.gz from the downloads page

@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.zilverline</groupId>
@@ -8,9 +9,8 @@
   <packaging>jar</packaging>
   <name>Apache FOP Server: ${project.artifactId}</name>
   <properties>
-    <scala.version>2.9.3</scala.version>
-    <scala.binary.version>2.9.3</scala.binary.version>
-    <jetty.version>7.4.5.v20110725</jetty.version>
+    <scala.version>2.10.1</scala.version>
+    <scala.binary.version>2.10</scala.binary.version>
     <http.client.version>4.1.1</http.client.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -63,17 +63,17 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.5.8</version>
+        <version>1.7.3</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
-        <version>1.5.8</version>
+        <version>1.7.3</version>
       </dependency>
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
-        <version>1.2.14</version>
+        <version>1.2.17</version>
       </dependency>
       <dependency>
         <groupId>org.scala-lang</groupId>
@@ -81,9 +81,24 @@
         <version>${scala.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-server</artifactId>
-        <version>${jetty.version}</version>
+        <groupId>org.clapper</groupId>
+        <artifactId>grizzled-slf4j_2.10</artifactId>
+        <version>1.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>net.databinder</groupId>
+        <artifactId>unfiltered_${scala.binary.version}</artifactId>
+        <version>0.6.7</version>
+      </dependency>
+      <dependency>
+        <groupId>net.databinder</groupId>
+        <artifactId>unfiltered-filter_${scala.binary.version}</artifactId>
+        <version>0.6.7</version>
+      </dependency>
+      <dependency>
+        <groupId>net.databinder</groupId>
+        <artifactId>unfiltered-jetty_${scala.binary.version}</artifactId>
+        <version>0.6.7</version>
       </dependency>
       <dependency>
         <groupId>org.apache.xmlgraphics</groupId>
@@ -91,14 +106,9 @@
         <version>1.0</version>
       </dependency>
       <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>2.5</version>
-      </dependency>
-      <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.1</version>
+        <version>2.4</version>
       </dependency>
       <dependency>
         <groupId>uk.co.opsb</groupId>
@@ -118,24 +128,14 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
-        <version>${http.client.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpmime</artifactId>
-        <version>${http.client.version}</version>
+        <groupId>net.databinder.dispatch</groupId>
+        <artifactId>dispatch-core_${scala.binary.version}</artifactId>
+        <version>0.9.5</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-server</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -149,8 +149,8 @@
       <artifactId>scala-library</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
+      <groupId>org.clapper</groupId>
+      <artifactId>grizzled-slf4j_2.10</artifactId>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
@@ -161,17 +161,24 @@
       <artifactId>junit</artifactId>
     </dependency>
     <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>unfiltered_${scala.binary.version}</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>unfiltered-filter_${scala.binary.version}</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>unfiltered-jetty_${scala.binary.version}</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.binary.version}</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpmime
-      </artifactId>
+      <groupId>net.databinder.dispatch</groupId>
+      <artifactId>dispatch-core_${scala.binary.version}</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
@@ -223,34 +230,27 @@
         </executions>
       </plugin>
 
-            <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>3.1.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <checkMultipleScalaVersions>false</checkMultipleScalaVersions>
-                            <jvmArgs>
-                                <arg>-XX:+TieredCompilation</arg> <!-- Much faster Scala compilation -->
-                                <arg>-XX:CICompilerCount=1</arg> <!-- Number of HotSpot background compiler threads -->
-                            </jvmArgs>
-                            <recompileMode>incremental</recompileMode>
-                            <useZincServer>true</useZincServer>
-                            <args>
-                                <arg>-deprecation</arg>
-                                <arg>-unchecked</arg>
-                                <arg>-Xmax-classfile-name</arg>
-                                <arg>130</arg>
-                            </args>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>3.1.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <recompileMode>incremental</recompileMode>
+              <useZincServer>true</useZincServer>
+              <args>
+                <arg>-deprecation</arg>
+                <arg>-unchecked</arg>
+              </args>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -273,6 +273,16 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.14</version>
+        <configuration>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <systemPropertyVariables>
+            <java.awt.headless>true</java.awt.headless>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
       <plugin>
