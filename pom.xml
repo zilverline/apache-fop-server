@@ -8,7 +8,8 @@
   <packaging>jar</packaging>
   <name>Apache FOP Server: ${project.artifactId}</name>
   <properties>
-    <scala.version>2.9.1</scala.version>
+    <scala.version>2.9.3</scala.version>
+    <scala.binary.version>2.9.3</scala.binary.version>
     <jetty.version>7.4.5.v20110725</jetty.version>
     <http.client.version>4.1.1</http.client.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -106,8 +107,8 @@
       </dependency>
       <dependency>
         <groupId>org.scalatest</groupId>
-        <artifactId>scalatest_${scala.version}</artifactId>
-        <version>1.6.1</version>
+        <artifactId>scalatest_${scala.binary.version}</artifactId>
+        <version>1.9.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -161,7 +162,7 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_${scala.version}</artifactId>
+      <artifactId>scalatest_${scala.binary.version}</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
