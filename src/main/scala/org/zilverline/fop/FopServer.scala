@@ -16,7 +16,7 @@ object FopServer extends Logging {
 
   val plan = unfiltered.filter.Planify {
     case GET(Path("/is-alive"))                           => Ok ~> ResponseString("Ok")
-    case POST(Path("/pdf")) & Params(Xsl(xsl) & Xml(xml)) => generatePdf(xsl, xml)
+    case POST(Path("/pdf")) & Params(Xsl(xsl) & Xml(xml)) => generate(PdfDocument(xsl, xml))
   }
 
   def main(args: Array[String]): Unit = {
@@ -27,12 +27,11 @@ object FopServer extends Logging {
     }
   }
 
-  private def generatePdf(xsl: String, xml: String) = try {
-    val pdf = new PdfGenerator().createOutput(xsl, xml)
-    Ok ~> ContentType("application/pdf") ~> ResponseBytes(pdf)
+  private def generate(document: PdfDocument) = try {
+    Ok ~> ContentType("application/pdf") ~> ResponseBytes(document.render)
   } catch {
     case e: Exception =>
-      error(f"Error creating PDF for XML $xml with XSL $xsl: $e", e)
+      error(f"Error creating PDF for $document: $e", e)
       InternalServerError ~> ResponseString("See apache-fop-server/logs for more detailed error message.")
   }
 }

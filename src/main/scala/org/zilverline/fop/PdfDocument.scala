@@ -10,15 +10,14 @@ import org.apache.fop.apps.{Fop, FopFactory}
 import org.apache.xmlgraphics.util.MimeConstants
 import uk.co.opsb.butler.ButlerIO
 
-class PdfGenerator(configFileName: String = "fop/fop-config.xml") extends Logging {
-
-  def createOutput(xsl: String, xml: String): Array[Byte] = {
+case class PdfDocument(xsl: String, xml: String, configFileName: String = "fop/fop-config.xml") extends Logging {
+  def render: Array[Byte] = {
     debug(f"Generating PDF with XSL $xsl and XML $xml")
 
     val bos = new java.io.ByteArrayOutputStream()
     try {
       info("Generating PDF")
-      transform(xsl, xml, createFop(bos))
+      transform(createFop(bos))
       info("PDF generated!")
       bos.toByteArray()
     } finally {
@@ -45,7 +44,7 @@ class PdfGenerator(configFileName: String = "fop/fop-config.xml") extends Loggin
     fopFactory
   }
 
-  private def transform(xsl: String, xml: String, fop: Fop): Unit = {
+  private def transform(fop: Fop): Unit = {
     val src = new StreamSource(IOUtils.toInputStream(xml, "UTF-8"))
     val res = new SAXResult(fop.getDefaultHandler())
     createTransformer(xsl).transform(src, res)
