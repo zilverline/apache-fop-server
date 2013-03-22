@@ -3,10 +3,8 @@ package org.zilverline.fop
 import dispatch._
 import java.io.File
 import org.apache.commons.io.FileUtils
-import org.apache.xmlgraphics.util.MimeConstants
-import org.scalatest.{ BeforeAndAfterAll, FunSuite }
+import org.scalatest.{BeforeAndAfterAll, FunSuite}
 import org.scalatest.matchers.ShouldMatchers
-import scala.collection.JavaConverters._
 
 /*
  * Test the FopServer using the http://dispatch.databinder.net/ HTTP
