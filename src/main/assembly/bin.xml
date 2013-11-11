@@ -23,13 +23,6 @@
     </dependencySet>
   </dependencySets>
 
-  <files>
-    <file>
-      <fileMode>770</fileMode>
-      <outputDirectory>.</outputDirectory>
-      <source>${basedir}/src/main/resources/apache-fop-server</source>
-    </file>
-  </files>
   <fileSets>
     <fileSet>
       <directory>${basedir}/fop</directory>
@@ -38,13 +31,6 @@
     <fileSet>
       <directory>${basedir}/logs</directory>
       <outputDirectory>logs</outputDirectory>
-      <excludes>
-        <exclude>*</exclude>
-      </excludes>
-    </fileSet>
-    <fileSet>
-      <directory>${basedir}/pids</directory>
-      <outputDirectory>pids</outputDirectory>
       <excludes>
         <exclude>*</exclude>
       </excludes>
