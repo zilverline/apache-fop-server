@@ -32,16 +32,7 @@ case class PdfDocument(xsl: String, xml: String, configFileName: String = "fop/f
   }
 
   private def createFopFactory(): FopFactory = {
-    val fopFactory = FopFactory.newInstance()
-
-    fopFactory.setURIResolver(new URIResolver {
-      def resolve(href: String, base: String) = {
-        new StreamSource(ButlerIO.inputStreamFrom(href))
-      }
-    })
-
-    fopFactory.setUserConfig(new File(configFileName))
-    fopFactory
+    FopFactory.newInstance(new File(configFileName))
   }
 
   private def transform(fop: Fop): Unit = {
