@@ -6,7 +6,7 @@ import javax.xml.transform.{Transformer, TransformerFactory, URIResolver}
 import javax.xml.transform.sax.SAXResult
 import javax.xml.transform.stream.StreamSource
 import org.apache.commons.io.IOUtils
-import org.apache.fop.apps.{Fop, FopFactory}
+import org.apache.fop.apps.{FopConfParser, Fop, FopFactory}
 import org.apache.xmlgraphics.util.MimeConstants
 import uk.co.opsb.butler.ButlerIO
 
@@ -32,7 +32,10 @@ case class PdfDocument(xsl: String, xml: String, configFileName: String = "fop/f
   }
 
   private def createFopFactory(): FopFactory = {
-    FopFactory.newInstance(new File(configFileName))
+    val parser = new FopConfParser(new File(configFileName))
+    val builder = parser.getFopFactoryBuilder
+//    builder.setBaseURI(getClass.getResource("/font").toURI)
+    builder.build();
   }
 
   private def transform(fop: Fop): Unit = {

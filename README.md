@@ -6,15 +6,17 @@ The server uses the [Unfiltered](http://unfiltered.databinder.net/) Scala HTTP s
 
 Testing is done using the [Dispatch](http://dispatch.databinder.net/) HTTP client library.
 
+### How to build
+
+    mvn assembly:assembly
+
 ### How to use
 Download one of the tar.gz from the downloads page
     
-    tar xvzf apache-server-fop-[version].tar.gz
-    ./apache-fop-server start
+    tar xvzf apache-fop-server-[version].tar.gz
+    java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
 
-This will start the server in the background and will lsiten on port 9999. To stop the server you can use:
-
-    ./apache-fop-server stop
+This will start the server on port 9999.
 
 To generate a pdf one should POST to `http://localhost:9999/pdf` with 2 parameters: `xml` containing the XML representation of the pdf and `xsl` as the stylesheet to be used.
 
@@ -39,7 +41,7 @@ Example on how to use in Ruby using httpclient
 
 An example upstart script for installing this on the server could be
 
-    # apache-fop-server - simple webserver to enable generation of pdfs 
+    # apache-fop-server - simple webserver to enable generation of pdfs
     #
     # Simple embedded Jetty server to enable generation of pdfs using apache-fop
 
@@ -48,11 +50,11 @@ An example upstart script for installing this on the server could be
     start on runlevel [2345]
     stop on runlevel [!2345]
 
-    expect fork 
+    expect fork
 
     script
       chdir /opt/apps/apache-fop-server
-      exec sudo -u some-user ./apache-fop-server start
+      exec java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
     end script
 
 Fork and patch to contribute!
