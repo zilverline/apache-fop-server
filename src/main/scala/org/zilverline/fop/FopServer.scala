@@ -20,7 +20,12 @@ object FopServer extends Logging {
   }
 
   def main(args: Array[String]): Unit = {
-    System.setProperty("org.eclipse.jetty.server.Request.maxFormContentSize", "4000000")
+    val maxSize = args match {
+      case Array(max) => max
+      case Array() => "4000000"
+    }
+
+    System.setProperty("org.eclipse.jetty.server.Request.maxFormContentSize", maxSize)
 
     unfiltered.jetty.Http.local(DefaultPort).filter(plan).run { server =>
       sys.addShutdownHook(server.stop)
