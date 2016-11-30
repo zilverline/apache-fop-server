@@ -5,6 +5,7 @@ import java.io.File
 import org.apache.commons.io.FileUtils
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 import org.scalatest.matchers.ShouldMatchers
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /*
  * Test the FopServer using the http://dispatch.databinder.net/ HTTP

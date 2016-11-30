@@ -6,7 +6,7 @@ import javax.xml.transform.{Transformer, TransformerFactory, URIResolver}
 import javax.xml.transform.sax.SAXResult
 import javax.xml.transform.stream.StreamSource
 import org.apache.commons.io.IOUtils
-import org.apache.fop.apps.{Fop, FopFactory}
+import org.apache.fop.apps.{FopConfParser, Fop, FopFactory}
 import org.apache.xmlgraphics.util.MimeConstants
 import uk.co.opsb.butler.ButlerIO
 
@@ -16,9 +16,10 @@ case class PdfDocument(xsl: String, xml: String, configFileName: String = "fop/f
 
     val bos = new java.io.ByteArrayOutputStream()
     try {
-      info("Generating PDF")
+      val start = System.currentTimeMillis();
       transform(createFop(bos))
-      info("PDF generated!")
+      val time = System.currentTimeMillis() - start;
+      info(f"PDF generated in $time ms")
       bos.toByteArray()
     } finally {
       IOUtils.closeQuietly(bos)
@@ -32,16 +33,9 @@ case class PdfDocument(xsl: String, xml: String, configFileName: String = "fop/f
   }
 
   private def createFopFactory(): FopFactory = {
-    val fopFactory = FopFactory.newInstance()
-
-    fopFactory.setURIResolver(new URIResolver {
-      def resolve(href: String, base: String) = {
-        new StreamSource(ButlerIO.inputStreamFrom(href))
-      }
-    })
-
-    fopFactory.setUserConfig(new File(configFileName))
-    fopFactory
+    val parser = new FopConfParser(new File(configFileName))
+    val builder = parser.getFopFactoryBuilder
+    builder.build();
   }
 
   private def transform(fop: Fop): Unit = {
