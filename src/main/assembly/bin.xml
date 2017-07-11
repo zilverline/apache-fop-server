@@ -29,6 +29,10 @@
       <outputDirectory>fop</outputDirectory>
     </fileSet>
     <fileSet>
+      <directory>${basedir}/conf</directory>
+      <outputDirectory>conf</outputDirectory>
+    </fileSet>
+    <fileSet>
       <directory>${basedir}/logs</directory>
       <outputDirectory>logs</outputDirectory>
       <excludes>
