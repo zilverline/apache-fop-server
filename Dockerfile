@@ -1,6 +1,6 @@
 FROM alpine:3.6
 
-RUN apk --update add openjdk7-jre tar
+RUN apk --update add openjdk8-jre tar
 
 RUN mkdir /fop
 WORKDIR /fop
