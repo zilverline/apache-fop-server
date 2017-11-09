@@ -28,39 +28,41 @@ To generate a pdf one should POST to `http://localhost:9999/pdf` with 2 paramete
 
 Example on how to use in Ruby using httpclient
 
-    require 'httpclient'
+```ruby
+require 'httpclient'
 
-    module Adapters::ApacheFopAdapter
+module Adapters::ApacheFopAdapter
+  FOP_URL = "http://localhost"
+  FOP_PORT = 9999
 
-      FOP_URL = "http://localhost"
-      FOP_PORT = 9999
+  def get_pdf(xml, xsl)
+    body = {xsl: IO.read(xsl), xml: xml}
+    client = HTTPClient.new
+    result = client.post "#{FOP_URL}:#{FOP_PORT}/pdf", body
+    result.body
+  end
 
-      def get_pdf(xml, xsl)
-        body = {xsl: IO.read(xsl), xml: xml}
-        client = HTTPClient.new
-        result = client.post "#{FOP_URL}:#{FOP_PORT}/pdf", body
-        result.body
-      end
-
-      module_function :get_pdf
-    end
+  module_function :get_pdf
+end
+```
 
 An example upstart script for installing this on the server could be
+```upstart
+# apache-fop-server - simple webserver to enable generation of pdfs
+#
+# Simple embedded Jetty server to enable generation of pdfs using apache-fop
 
-    # apache-fop-server - simple webserver to enable generation of pdfs
-    #
-    # Simple embedded Jetty server to enable generation of pdfs using apache-fop
+description     "webserver to enable generation of pdfs using apache-fop"
 
-    description     "webserver to enable generation of pdfs using apache-fop"
+start on runlevel [2345]
+stop on runlevel [!2345]
 
-    start on runlevel [2345]
-    stop on runlevel [!2345]
+expect fork
 
-    expect fork
-
-    script
-      chdir /opt/apps/apache-fop-server
-      exec java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
-    end script
+script
+  chdir /opt/apps/apache-fop-server
+  exec java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
+end script
+```
 
 Fork and patch to contribute!
