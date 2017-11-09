@@ -27,7 +27,7 @@ object FopServer extends Logging {
 
     System.setProperty("org.eclipse.jetty.server.Request.maxFormContentSize", maxSize)
 
-    unfiltered.jetty.Http.local(DefaultPort).filter(plan).run { server =>
+    unfiltered.jetty.Http.apply(DefaultPort).filter(plan).run { server =>
       sys.addShutdownHook(server.stop)
     }
   }
