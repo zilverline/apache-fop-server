@@ -11,10 +11,16 @@ Testing is done using the [Dispatch](http://dispatch.databinder.net/) HTTP clien
     mvn assembly:assembly
 
 ### How to use
-Download one of the tar.gz from the downloads page
-    
-    tar xvzf apache-fop-server-[version].tar.gz
-    java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
+Use the docker image:
+```sh
+docker run zilverline/fop:1.7
+```
+
+Or download one of the tar.gz from the downloads page
+```sh
+tar xvzf apache-fop-server-[version].tar.gz
+java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
+```
 
 This will start the server on port 9999.
 
