@@ -16,7 +16,7 @@ jobs:
     - name: Build
       uses: actions/docker/cli@master
       with:
-        args: build -t apache-fop-server
+        args: build -t apache-fop-server .
     - name: Docker Login
       uses: actions/docker/login@master
       env:
