@@ -26,4 +26,4 @@ jobs:
     - name: Publish
       uses: actions/docker/cli@master
       with:
-        args: push t3n/apache-fop-server
+        args: push apache-fop-server
