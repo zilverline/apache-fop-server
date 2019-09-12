@@ -13,6 +13,11 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn package --file pom.xml
+    - name: Build
+      uses: actions/action-builder/docker@master
+      with:
+        entrypoint: make
+        args: build
     - name: Docker Login
       uses: actions/docker/login@master
       env:
