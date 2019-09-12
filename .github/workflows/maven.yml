@@ -15,8 +15,8 @@ jobs:
       run: mvn package --file pom.xml
     - name: Build
       uses: actions/docker/cli@master
-      args: build -t apache-fop-server
-
+      with:
+        args: build -t apache-fop-server
     - name: Docker Login
       uses: actions/docker/login@master
       env:
@@ -25,4 +25,5 @@ jobs:
         DOCKER_REGISTRY_URL: "docker.pkg.github.com"
     - name: Publish
       uses: actions/docker/cli@master
-      args: push t3n/apache-fop-server
+      with:
+        args: push t3n/apache-fop-server
