@@ -1,12 +1,10 @@
-name: Java CI
+name: Build and Push
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up JDK 1.8
@@ -15,3 +13,14 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn package --file pom.xml
+    - name: Docker Login
+      uses: actions/docker/login@master
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_REGISTRY_URL: "docker.pkg.github.com"
+    - name: Publish
+      uses: actions/action-builder/docker@master
+      with:
+        entrypoint: make
+        args: publish
