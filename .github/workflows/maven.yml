@@ -16,7 +16,7 @@ jobs:
     - name: Build
       uses: actions/docker/cli@master
       with:
-        args: build -t docker.pkg.github.com/t3n/apache-fop-server:2.1 .
+        args: build -t docker.pkg.github.com/t3n/apache-fop-server/apache-fop-server:2.1 .
     - name: Docker Login
       uses: actions/docker/login@master
       env:
@@ -26,4 +26,4 @@ jobs:
     - name: Publish
       uses: actions/docker/cli@master
       with:
-        args: push docker.pkg.github.com/t3n/apache-fop-server:2.1
+        args: push docker.pkg.github.com/t3n/apache-fop-server/apache-fop-server:2.1
