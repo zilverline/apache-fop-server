@@ -2,7 +2,7 @@
 
 Simple embedded HTTP server that provides creating PDF's using [apache fop](http://xmlgraphics.apache.org/fop/).
 
-The server uses the [Unfiltered](http://unfiltered.databinder.net/) Scala HTTP server toolkit and Jetty.
+The server uses the [Unfiltered](https://unfiltered.ws/) Scala HTTP server toolkit and Jetty.
 
 Testing is done using the [Dispatch](http://dispatch.databinder.net/) HTTP client library.
 
@@ -23,6 +23,7 @@ java -cp apache-fop-server.jar:lib/* org.zilverline.fop.FopServer
 ```
 
 This will start the server on port 9999.
+You can use the command line argument to increase the amount of posting data, optional. 400000 bytes restriction by default.
 
 To generate a pdf one should POST to `http://localhost:9999/pdf` with 2 parameters: `xml` containing the XML representation of the pdf and `xsl` as the stylesheet to be used.
 
