@@ -6,6 +6,8 @@ The server uses the [Unfiltered](http://unfiltered.databinder.net/) Scala HTTP s
 
 Testing is done using the [Dispatch](http://dispatch.databinder.net/) HTTP client library.
 
+Must run with OpenJDK8
+
 ### How to build
 
     mvn assembly:assembly
@@ -13,7 +15,7 @@ Testing is done using the [Dispatch](http://dispatch.databinder.net/) HTTP clien
 ### How to use
 Use the docker image:
 ```sh
-docker run zilverline/fop:1.7
+docker run zilverline/fop:1.8
 ```
 
 Or download one of the tar.gz from the downloads page
