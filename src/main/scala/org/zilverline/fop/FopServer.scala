@@ -14,6 +14,14 @@ object FopServer extends Logging {
   object Xsl extends Params.Extract("xsl", Params.first)
   object Xml extends Params.Extract("xml", Params.first)
 
+  val heapSize = Runtime.getRuntime().totalMemory();
+  val heapMaxSize = Runtime.getRuntime().maxMemory();
+  val heapFreeSize = Runtime.getRuntime().freeMemory();
+
+  info(s"Heap size: ${heapSize}");
+  info(s"Heap max size: ${heapMaxSize}");
+  info(s"Heap free size: ${heapFreeSize}");
+
   val plan = unfiltered.filter.Planify {
     case GET(Path("/is-alive"))                           => Ok ~> ResponseString("Ok")
     case POST(Path("/pdf")) & Params(Xsl(xsl) & Xml(xml)) => generate(PdfDocument(xsl, xml))
