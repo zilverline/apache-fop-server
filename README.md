@@ -68,4 +68,12 @@ script
 end script
 ```
 
+### Build / push Docker image
+
+```shell
+docker build --platform linux/amd64,linux/arm64 -t zilverline/fop:latest -t zilverline/fop:1.91 .
+docker push zilverline/fop:1.91
+docker push zilverline/fop:latest
+```
+
 Fork and patch to contribute!
